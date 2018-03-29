@@ -1,0 +1,279 @@
+read cube ../ReadCubeFile/C60fromC60onCu111.LUMO+1_E.50.cube
+read cube C60fromC60onCu111.LUMO+1_A.50.cube
+constant_LDOS  zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 file 2 LDOS 1.0e-4
+constant_LDOS  zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 file 0 LDOS 1.0e-4
+constant_LDOS  zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 file 1 LDOS 1.0e-4
+
+
+read cube /home/bulou/workdir/C60onCu111/C60fromC60onCu111.LUMO_E.50.cube
+read cube /home/bulou/workdir/C60onCu111/C60fromC60onCu111.LUMO_A.50.cube
+read cube /home/bulou/workdir/C60onCu111/C60fromC60onCu111.LUMO+1_A.50.cube
+read cube /home/bulou/workdir/C60onCu111/C60fromC60onCu111.LUMO+1_E.50.cube
+
+constant_height file 0 iz0 270
+constant_height file 1 iz0 270
+constant_height file 2 iz0 270
+constant_height file 3 iz0 270
+
+
+constant_LDOS  zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 file 0 LDOS 1.0e-4
+constant_LDOS  zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 file 1 LDOS 1.0e-4
+constant_LDOS  zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 file 2 LDOS 1.0e-4
+constant_LDOS  zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 file 3 LDOS 1.0e-4
+
+new_cubefile init_file 0
+add to 4 list 0 1 2 3
+constant_LDOS  zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 file 4 LDOS 1.0e-4
+projection file 0 ref 4
+projection file 1 ref 4
+projection file 2 ref 4
+projection file 3 ref 4
+
+constant_LDOS  zmax 32 zmin 22 nlevel 100 histmin 22 histmax 35 file 4 LDOS 1.0e-5
+projection file 0 ref 4 histmax 6e-4 minmap 1.0e-4 mapmax 3.0e-4
+projection file 1 ref 4 histmax 6e-4 minmap 1.0e-4 mapmax 3.0e-4
+projection file 2 ref 4 histmax 2e-4 minmap 0.0e-4 mapmax 2.0e-4
+projection file 3 ref 4 histmax 6e-4 minmap 0.0e-4 mapmax 6.0e-4
+
+
+
+histlevel 100
+
+
+read LDOS /home/bulou/workdir/C60onCu111/LDOS_C60onCu111
+
+
+read cube C60fromC60onCu111.LUMO+1_A.50.cube
+constant_LDOS  zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 file 0 LDOS 1.0e-5 scan 6.5 0 6.5 18 10
+##################################################################################################
+#
+#
+#
+# read the input cube file
+#read cube /home/bulou/workdir/C60onCu111/C60fromC60onCu111.LUMO_E.50.cube
+
+read cube C60fromC60onCu111.LUMO+1_E.50.cube #0
+povray camera 5 10 40 light1 20 0 0 light2 0 20 0 light3 0 0 50
+
+povray camera 10 20 80 light1 20 0 0 light2 0 20 0 light3 0 0 50	
+
+
+read cube C60fromC60onCu111.LUMO+1_E.50.cube #0
+povray camera 50 50 50 light1 20 20 20 light2 0 0 55 light3 20 0 55 plane  2.0 12.8501 22.0      10.0 12.8501 22.0         10.0 12.8501 30.0       2.0 12.8501 30.0  transpa 0.5 color 1.0 0.0 0.0
+
+read cube C60fromC60onCu111.LUMO+1_A.50.cube #1
+new_cubefile init_file 0 #2
+add to 2 list 0 1 
+
+
+
+pdfname 0 essai.pdf
+constant_height file 0 iz0 270 line 0 130 180 130 
+
+pdfname 0 essai3.pdf
+constant_LDOS  zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 file 0 LDOS 3.0e-5
+pdfname 1 essai3.pdf
+constant_LDOS  zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 file 1 LDOS 3.0e-5
+
+pdfname 2 essai3.pdf
+constant_LDOS  zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 file 2 LDOS 3.0e-5
+
+
+pdfname 0 essai2.pdf
+ymap file 0 ref 0 iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line LDOS 270 contour nlevelcont 5 man 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3  minx 7 maxx 20 atom .8
+
+pdfname 0 essai2.pdf
+ymap file 0 ref 2 iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line LDOS 270 contour nlevelcont 5 man 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3  minx 7 maxx 20 atom .8
+pdfname 1 essai2.pdf
+ymap file 1 ref 2 iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line LDOS 270 contour nlevelcont 5 man 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3  minx 7 maxx 20 atom .8
+
+
+
+#pdfname 0 essai2.pdf
+#ymap iy0 130 plenvxmin 7 plenvxmax 20  plenvymin 25 plenvymax 33 nlevel 100 line 20 270 180 270 contour nlevelcont 5 man 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3 
+
+pdfname 0 essai2.pdf
+#ymap iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line 20 270 180 270 contour nlevelcont 5 man 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3 
+
+#ymap iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line LDOS 270 contour nlevelcont 5 man 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3 minx 7 maxx 20 atom .8
+
+ymap iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line z 270 contour nlevelcont 5 man 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3  minx 7 maxx 20 atom .8
+
+info_file
+
+##################################################################################################
+#
+#
+#
+read cube /home/bulou/workdir/C60onCu111/C60fromC60onCu111.LUMO_E.50.cube
+read cube /home/bulou/workdir/C60onCu111/C60fromC60onCu111.LUMO_A.50.cube
+read cube /home/bulou/workdir/C60onCu111/C60fromC60onCu111.LUMO+1_A.50.cube
+read cube /home/bulou/workdir/C60onCu111/C60fromC60onCu111.LUMO+1_E.50.cube
+new_cubefile init_file 0
+add to 4 list 0 1 2 3
+
+pdfname 4 essai.pdf
+constant_height file 4 iz0 270 line 0 130 180 130 
+
+pdfname 4 essai2.pdf
+ymap file 4 iy0 130 plenvxmin 7 plenvxmax 20  plenvymin 25 plenvymax 33 nlevel 100 line 20 270 180 270 contour nlevelcont 5 man 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3 
+
+
+
+#pdfname 0 essai2.pdf
+#ymap iy0 132 plenvxmin 7 plenvxmax 20  plenvymin 25 plenvymax 32 nlevel 100 line 20 270 180 270 contour nlevelcont 70 contmin 1.0e-5 contmax 0.001  
+
+
+
+
+###############################################################################"
+read cube /home/bulou/workdir/C60onCu111/C60fromC60onCu111.LUMO_E.50.cube      #0
+read cube /home/bulou/workdir/C60onCu111/C60fromC60onCu111.LUMO_A.50.cube      #1
+read cube /home/bulou/workdir/C60onCu111/C60fromC60onCu111.LUMO+1_A.50.cube    #2
+read cube /home/bulou/workdir/C60onCu111/C60fromC60onCu111.LUMO+1_E.50.cube    #3
+new_cubefile init_file 0
+add to 4 list 0 1 2 3                                                          #4
+
+pdfname 0 LDOS_E.pdf
+constant_LDOS  file 0 zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 LDOS 3.0e-5
+shell evince LDOS_E.pdf&
+
+pdfname 1 LDOS_A.pdf
+constant_LDOS  file 1 zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 LDOS 3.0e-5
+shell evince LDOS_A.pdf&
+
+pdfname 2 LDOS_A+1.pdf
+constant_LDOS  file 2 zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 LDOS 3.0e-5
+shell evince LDOS_A+1.pdf&
+
+pdfname 3 LDOS_E+1.pdf
+constant_LDOS  file 3 zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 LDOS 3.0e-5
+shell evince LDOS_E+1.pdf&
+
+pdfname 4 LDOS.pdf
+constant_LDOS  file 4 zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 LDOS 3.0e-5
+shell evince LDOS.pdf&
+
+pdfname 4 ymap.pdf
+#ymap file 4 iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line z 270 contour nlevelcont 5 man 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3  minx 7 maxx 20 atom .8
+ymap file 4 ref 4 iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line LDOS 270 contour nlevelcont 5 man 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3  minx 8 maxx 18 miny 2.0e-5 atom .8
+shell evince ymap.pdf&
+
+
+pdfname 0 ymap_E.pdf
+ymap file 0 ref 4 iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line LDOS 270 contour nlevelcont 5 man 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3  minx 7 maxx 20 atom .8
+shell evince ymap_E.pdf&
+
+pdfname 1 ymap_A.pdf
+ymap file 1 ref 4 iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line LDOS 270 contour nlevelcont 5 man 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3  minx 7 maxx 20 atom .8
+shell evince ymap_A.pdf&
+
+pdfname 2 ymap_A+1.pdf
+ymap file 2 ref 4 iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line LDOS 270 contour nlevelcont 5 man 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3  minx 7 maxx 20 atom .8
+shell evince ymap_A+1.pdf&
+
+pdfname 3 ymap_E+1.pdf
+ymap file 3 ref 4 iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line LDOS 270 contour nlevelcont 5 man 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3  minx 7 maxx 20 atom .8
+shell evince ymap_E+1.pdf&
+
+
+
+
+new_cubefile init_file 0
+add to 5 list 0 1                                                          # A+E
+
+pdfname 5 LDOSA+E.pdf
+constant_LDOS  file 5 zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 LDOS 3.0e-5
+shell evince LDOSA+E.pdf&
+
+pdfname 1 ymap_A_A+E.pdf
+ymap file 1 ref 5 iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line LDOS 270 contour nlevelcont 5 man 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3  minx 7 maxx 20 zminx 7 zmaxx 20 zminy 27 atom .8
+shell evince ymap_A_A+E.pdf&
+
+
+
+pdfname 1 LDOS_A.pdf
+constant_LDOS  file 1 zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 LDOS 1.0e-4
+shell evince LDOS_A.pdf&
+
+pdfname 5 LDOSA+E.pdf
+constant_LDOS  file 5 zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 LDOS 1.0e-4
+shell evince LDOSA+E.pdf&
+
+pdfname 1 ymap_A_A+E.pdf
+ymap file 1 ref 5 iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line LDOS 270 contour nlevelcont 6 man 3.0e-6 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3  minx 7 maxx 20 zminx 7 zmaxx 20 zminy 27 zmaxy 31 atom .8
+shell evince ymap_A_A+E.pdf&
+
+
+pdfname 1 LDOS_A.pdf
+constant_LDOS  file 1 zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 LDOS 0.9e-5
+shell evince LDOS_A.pdf&
+
+pdfname 1 ymap_A_A.pdf
+ymap file 1 ref 1 iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line LDOS 270 contour nlevelcont 6 man 3.0e-6 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3  minx 7 maxx 20 zminx 7 zmaxx 20 zminy 27  atom .8
+shell evince ymap_A_A.pdf&
+
+
+
+pdfname 1 essai.pdf
+ymap file 1 ref 5 iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line z 270 contour nlevelcont 6 man 3.0e-6 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3  minx 7 maxx 20 zminx 7 zmaxx 20 zminy 27  atom .8
+shell evince essai.pdf&
+
+
+###############################################################################"
+#
+# reading of the source files
+#
+read cube /home/bulou/workdir/C60onCu111/C60fromC60onCu111.LUMO_E.50.cube      #0
+read cube /home/bulou/workdir/C60onCu111/C60fromC60onCu111.LUMO_A.50.cube      #1
+
+#
+# computing of the 2D map giving the coordinate z where LDOS=3.0e-5
+#
+pdfname 0 LDOS_E.pdf
+constant_LDOS  file 0 zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 LDOS 3.0e-5
+shell evince LDOS_E.pdf&
+pdfname 1 LDOS_A.pdf
+constant_LDOS  file 1 zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 LDOS 3.0e-5
+shell evince LDOS_A.pdf&
+#
+# sum LUMO A + E
+#
+new_cubefile init_file 0
+add to 2 list 0 1
+#
+# computing of the 2D map giving the coordinate z where LDOS=3.0e-5 for A+E
+#
+pdfname 2 LDOSA+E.pdf
+constant_LDOS  file 2 zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 LDOS 3.0e-5
+shell evince LDOSA+E.pdf&
+#
+# projection of the z trajectory computed from the LDOS=Cte on A+E
+#
+pdfname 1 ymap_A_A+E.pdf
+ymap file 1 ref 2 iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line LDOS 270 contour nlevelcont 6 man 3.0e-6 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3  minx 7 maxx 20 zminx 7 zmaxx 20 zminy 27 atom .8
+shell evince ymap_A_A+E.pdf&
+
+pdfname 1 LDOS_A.pdf
+constant_LDOS  file 1 zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 LDOS 0.9e-5
+shell evince LDOS_A.pdf&
+
+pdfname 1 ymap_A_A.pdf
+ymap file 1 ref 1 iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line LDOS 270 contour nlevelcont 6 man 3.0e-6 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3  minx 7 maxx 20 zminx 7 zmaxx 20 zminy 27  atom .8
+shell evince ymap_A_A.pdf&
+
+
+pdfname 1 ymap_A_A_Cstz.pdf
+ymap file 1 ref 1 iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line z 270 contour nlevelcont 6 man 3.0e-6 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3  minx 7 maxx 20 zminx 7 zmaxx 20 zminy 27  atom .8
+shell evince ymap_A_A_Cstz.pdf&
+
+
+
+
+
+pdfname 0 LDOSE.pdf
+constant_LDOS  file 0 zmax 50 zmin 15 nlevel 100 histmin 22 histmax 35 LDOS 0.9e-5
+shell evince LDOSE.pdf&
+pdfname 0 ymap_E.pdf
+ymap file 0 ref 0 iy0 129 plenvxmin 7 plenvxmax 20  plenvymin 25.75 plenvymax 33 nlevel 100 line LDOS 270 contour nlevelcont 6 man 3.0e-6 1.0e-5 .3e-4 1.0e-4 0.3e-3 1.0e-3  minx 7 maxx 20 zminx 7 zmaxx 20 zminy 27  atom .8
+shell evince ymap_E.pdf&
