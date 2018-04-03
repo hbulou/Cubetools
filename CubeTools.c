@@ -1572,6 +1572,7 @@ int main(int nargument,char **argument) {
 	if(strcmp(sline->words[0],"diff")==0)  {
 	/* ################################################################################# */
 	  int i,idx1=-1,idx2=-1,idxfiletostock=-1;
+	  double normalize=1.0;
 	  for(i=0;i<sline->ntokens;i++)	    {
 	    if(strcmp(sline->words[i],"to")==0) 	  {
 	      idxfiletostock=atoi(sline->words[i+1]);
@@ -1582,13 +1583,16 @@ int main(int nargument,char **argument) {
 	    if(strcmp(sline->words[i],"idx2")==0) 	  {
 	      idx2=atoi(sline->words[i+1]);
 	    }
+	    if(strcmp(sline->words[i],"normalize")==0) 	  {
+	      normalize=0.7071067;
+	    }
 	  }
 	  if(idxfiletostock>=0 && idx1>=0 && idx2>=0){
 	    int ix,iy,iz;
 	    for (ix=0;ix<file[idxfiletostock]->N[X];ix++) {
 	      for (iy=0;iy<file[idxfiletostock]->N[Y];iy++) {
 		for (iz=0;iz<file[idxfiletostock]->N[Z];iz++) {
-		  file[idxfiletostock]->data[DATA][ix][iy][iz]=file[idx1]->data[DATA][ix][iy][iz]-file[idx2]->data[DATA][ix][iy][iz];
+		  file[idxfiletostock]->data[DATA][ix][iy][iz]=normalize*(file[idx1]->data[DATA][ix][iy][iz]-file[idx2]->data[DATA][ix][iy][iz]);
 		}
 	      }
 	    }
@@ -1653,10 +1657,16 @@ int main(int nargument,char **argument) {
 	/* ################################################################################# */
 	  int i,idxfiletostock;
 	  int nfiletoadd,*listfiletoadd; nfiletoadd=sline->ntokens-1;
+	  int normalize=FALSE;
+	  double norm=1.0;
 	  for(i=0;i<sline->ntokens;i++)	    {
 	    if(strcmp(sline->words[i],"to")==0) 	  {
 	      idxfiletostock=atoi(sline->words[i+1]);
 	      nfiletoadd-=2;
+	    }
+	    if(strcmp(sline->words[i],"normalize")==0) 	  {
+	      nfiletoadd--;
+	      normalize=TRUE;
 	    }
 	  }
 	  int j;
@@ -1667,6 +1677,7 @@ int main(int nargument,char **argument) {
 	      for(j=0;j<nfiletoadd;j++) listfiletoadd[j]=atoi(sline->words[i+1+j]);
 	    }
 	  }
+	  if(normalize==TRUE) norm=pow(nfiletoadd,-.5);
 	  fprintf(stdout,"### %d file to add\n### list:",nfiletoadd);
 	  for(j=0;j<nfiletoadd;j++) fprintf(stdout,"### %d ",listfiletoadd[j]);
 	  fprintf(stdout,"\n");
@@ -1676,7 +1687,7 @@ int main(int nargument,char **argument) {
 	      for (iz=0;iz<file[idxfiletostock]->N[Z];iz++) {
 		for(i=0;i<nfiletoadd;i++){
 		  j=listfiletoadd[i];
-		  file[idxfiletostock]->data[DATA][ix][iy][iz]+=file[j]->data[DATA][ix][iy][iz]; 
+		  file[idxfiletostock]->data[DATA][ix][iy][iz]+=norm*file[j]->data[DATA][ix][iy][iz]; 
 		}
 	      }
 	    }
